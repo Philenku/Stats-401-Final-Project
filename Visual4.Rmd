@@ -1,0 +1,32 @@
+---
+title: "Visual2"
+output: html_document
+date: "2022-10-12"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+library(circlepackeR)
+library(data.tree)
+library(htmlwidgets)
+```
+
+```{r}
+ data <- read.csv('R/Circle_pack_df.csv')
+```
+
+```{r}
+data$pathString <- paste("world", data$level1, data$level2, sep = "/")
+population <- as.Node(data)
+```
+
+
+```{r}
+circlepackeR(population, size = "Counts")
+```
+
