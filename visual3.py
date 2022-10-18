@@ -228,7 +228,6 @@ def vis_male_prisoners():
 
 
 def on_move(event):
-    #print('on_move GETS CALLED')
     print(points_with_annotation)
     visibility_changed = False
     for point, annotation in points_with_annotation:
@@ -239,14 +238,43 @@ def on_move(event):
             annotation.set_visible(should_be_visible)
 
     if visibility_changed:        
-        print('issue')
         plt.draw()
 
-#plt.ioff()
-#plt.clf()
-fig1, ax1 = vis_all_prisoners()
-fig2, ax2 = vis_female_prisoners()
-fig3, ax3 = vis_male_prisoners()
-#plt.ion()
-#plt.ion()
+#fig1, ax1 = vis_all_prisoners()
+
+
+#fig2, ax2 = vis_female_prisoners()
+#fig3, ax3 = vis_male_prisoners()
+#plt.show()
+
+
+from matplotlib.widgets import Button
+fig, ax = vis_all_prisoners()
+#plt.subplots_adjust(bottom=0.2)
+#x = range(-50,50)
+#y = range(-50,50)
+
+#l, = plt.plot(x, y, lw=2)
+#ax.title.set_text('y = x')
+
+class Index(object):
+    ind = 0
+    global funcs # used so yu can access local list, funcs, here
+    def next(self, event):
+        fig2, ax2 = vis_female_prisoners()
+        plt.show()
+
+    def prev(self, event):
+        fig3, ax3 = vis_male_prisoners()
+        plt.show()
+
+funcs = [vis_all_prisoners, vis_male_prisoners, vis_female_prisoners] # functions in a list so you can interate over
+callback = Index()
+axprev = plt.axes([0.7, 0.05, 0.1, 0.075])
+axnext = plt.axes([0.81, 0.05, 0.1, 0.075])
+bnext = Button(axnext, 'Female Prisoners')
+bnext.on_clicked(callback.next)
+bprev = Button(axprev, 'Male Prisoners')
+bprev.on_clicked(callback.prev)
+
 plt.show()
