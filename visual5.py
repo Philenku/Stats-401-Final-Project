@@ -2,7 +2,10 @@ import pandas as pd
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
+plt.switch_backend('WebAgg')
+
 import mplcursors
+#import mpld3
 
 df = pd.read_csv("extracted_data_vis5.csv")
 
@@ -41,7 +44,7 @@ def main():
                 bbox=props, arrowprops=arrow
             )
             
-            annotation.set_visible(True)
+            annotation.set_visible(False)
             print(ax)
             points_with_annotation.append([point, annotation, ax])
             
@@ -57,6 +60,10 @@ def main():
                  'Click again to restore it to its original position')
     
     plt.show()
+    #html_str = mpld3.fig_to_html(subplots.fig)
+    #Html_file= open("index.html","w")
+    #Html_file.write(html_str)
+    #Html_file.close()
 
 
 class ZoomingSubplots(object):

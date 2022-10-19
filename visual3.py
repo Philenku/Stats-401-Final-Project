@@ -1,8 +1,9 @@
 import pandas as pd
 import numpy as np
 import numpy as np
+#import matplotlib
 import matplotlib.pyplot as plt
-
+plt.switch_backend('WebAgg')
 # EXTRACT DATA FOR THE VISUAL
 df = pd.read_csv('extracted_data_vis3.csv')
 
@@ -177,7 +178,7 @@ def survey(results, category_names, title, annotations):
             point, = plt.plot(x, y, 'o', markersize=10)
             # annotating
             annotation = func_annotations(ax, x, y, annotations, double_loop_j, double_loop_i, c)
-            annotation.set_visible(True)
+            annotation.set_visible(False)
             points_with_annotation.append([point, annotation])
             
             double_loop_i += 1
@@ -278,3 +279,8 @@ bprev = Button(axprev, 'Male Prisoners')
 bprev.on_clicked(callback.prev)
 
 plt.show()
+#import mpld3
+#html_str = mpld3.fig_to_html(fig)
+#Html_file= open("index.html","w")
+#Html_file.write(html_str)
+#Html_file.close()
